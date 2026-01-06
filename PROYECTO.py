@@ -15,8 +15,8 @@ st.divider()
 # cargamos los datos con la cache
 def load_data():
     # leemos los dos CSVs
-    df1 = pd.read_csv('C:/Users/ctr72/OneDrive/Documentos/proyecto_viso/parte_1.csv', low_memory=False)
-    df2 = pd.read_csv('C:/Users/ctr72/OneDrive/Documentos/proyecto_viso/parte_2.csv', low_memory=False)
+    df1 = pd.read_csv('parte_1.csv', low_memory=False)
+    df2 = pd.read_csv('parte_2.csv', low_memory=False)
 
     # unimos los dos en un unico df
     df = pd.concat([df1, df2], ignore_index=True)
