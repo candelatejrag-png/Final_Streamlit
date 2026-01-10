@@ -15,15 +15,38 @@ st.divider()
 # cargamos los datos con la cache
 def load_data():
     # leemos los dos CSVs
-    df1 = pd.read_csv('parte_1.csv', low_memory=False)
-    df2 = pd.read_csv('parte_2.csv', low_memory=False)
+    # para que la url se carge rapido vamos a leer solo las columnas que utilizo en el codigo
+    # para ayudar con la velocidad tambien especifico los tipos de esas columnas
+    COLS = [
+    "id","date","store_nbr","family","sales","onpromotion",
+    "holiday_type","locale","locale_name","description","transferred",
+    "dcoilwtico","city","state","store_type","cluster","transactions",
+    "year","month","week","quarter","day_of_week"]
+    DTYPES = {
+        "store_nbr": "int16",
+        "cluster": "int16",
+        "onpromotion": "int32",
+        "year": "int16",
+        "month": "int8",
+        "week": "int16",
+        "quarter": "int8",
+        "sales": "float32",
+        "transactions": "float32",
+        "family": "category",
+        "state": "category",
+        "city": "category",
+        "store_type": "category",
+        "day_of_week": "category",
+        "holiday_type": "category",
+        "locale": "category",
+        "locale_name": "category",
+        "transferred": "boolean",}
+    
+    df1 = pd.read_csv("parte_1.csv", usecols=COLS, dtype=DTYPES, low_memory=False)
+    df2 = pd.read_csv("parte_2.csv", usecols=COLS, dtype=DTYPES, low_memory=False)
 
     # unimos los dos en un unico df
     df = pd.concat([df1, df2], ignore_index=True)
-
-    # eliminamos columna de indice si existe
-    if 'Unnamed: 0' in df.columns:
-        df = df.drop(columns=['Unnamed: 0'])
 
     # convertimos 'date' a datetime
     df['date'] = pd.to_datetime(df['date'], errors='coerce')
