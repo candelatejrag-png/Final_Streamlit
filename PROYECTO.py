@@ -148,7 +148,7 @@ with tab2:
 
     # creamos el desplegable de tienda
     stores = sorted(df_f['store_nbr'].dropna().unique().tolist())
-    store_selected = st.selectbox(f'Selecciona tienda (store_nbr) {stores}')
+    store_selected = st.selectbox(f'Selecciona tienda (store_nbr)', stores)
 
     # filtramos por tienda
     dstore = df_f[df_f['store_nbr'] == store_selected].copy()
@@ -172,7 +172,7 @@ with tab2:
     k1, k2, k3 = st.columns(3)
     k1.metric(f'Total ventas (sales)', total_products_sold)
     k2.metric(f'Ventas en promocion', total_products_sold_promo)
-    k3.metric(f'Productos distintos', dstore['fammily'].nunique())
+    k3.metric(f'Productos distintos', dstore['family'].nunique())
 
     st.divider()
 
@@ -190,7 +190,7 @@ with tab3:
 
     # creamos desplegable de estado
     states = sorted(df_f['state'].dropna().unique().tolist())
-    state_selected = st.selectbox(f'Selecciona estado (state) {states}')
+    state_selected = st.selectbox(f'Selecciona estado (state)', states)
 
     # filtramos por estado
     dstate = df_f[df_f['state'] == state_selected].copy()
